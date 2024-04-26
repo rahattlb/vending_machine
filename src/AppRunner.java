@@ -78,7 +78,7 @@ public class AppRunner {
             }
         }
     }
-    
+
     private PaymentMethod choosePayment() {
         print("Выберите способ оплаты:\n1.Оплата по карте\n2.Оплата монетами");
         try {
