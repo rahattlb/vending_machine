@@ -9,6 +9,7 @@ public class AppRunner {
     private final PaymentMethod cardAcceptor;
     private final PaymentMethod coinAcceptor;
     private PaymentMethod paymentMethod;
+    private int enteredMoney = 0;
     private static boolean isExit = false;
 
     private AppRunner() {
