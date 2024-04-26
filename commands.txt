@@ -1,0 +1,15 @@
+- git branch home_work_25 - создание ветки "home_work_25"
+
+- git checkout home_work_25 - переход на ветку "home_work_25"
+
+- git status - проверка на наличие изменений в файлах
+
+- git add . - добавить все файлы
+
+- git commit - фиксирование изменений 
+
+- git push - загрузка файлов на репозиторий(удаленный)
+
+- git checkout master - переход на ветку master
+
+- git merge home_work_25 - слияние веток
