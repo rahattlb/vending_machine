@@ -82,6 +82,21 @@ public class AppRunner {
     }
 
 
+    private PaymentMethod choosePayment() {
+        print("Выберите способ оплаты:\n1.Оплата по карте\n2.Оплата монетами");
+        try {
+            int method = intFromConsole();
+            if(method == 1) {
+                paymentMethod = cardPayment();
+            }else if(method == 2) {
+                paymentMethod = coinPayment();
+            }
+        }catch (InputMismatchException e) {
+            print("Недопустимое значение!");
+            choosePayment();
+        }
+        return paymentMethod;
+    }
     private PaymentMethod coinPayment() {
         try {
             print("Укажите сумму: ");
