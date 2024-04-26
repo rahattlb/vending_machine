@@ -82,14 +82,17 @@ public class AppRunner {
         }
     }
 
+    private String strFromConsole() {
+        return new Scanner(System.in).nextLine();
+    }
+    private int intFromConsole() {
+        return new Scanner(System.in).nextInt();
+    }
+
     private void showActions(UniversalArray<Product> products) {
         for (int i = 0; i < products.size(); i++) {
             print(String.format(" %s - %s", products.get(i).getActionLetter().getValue(), products.get(i).getName()));
         }
-    }
-
-    private String fromConsole() {
-        return new Scanner(System.in).nextLine();
     }
 
     private void showProducts(UniversalArray<Product> products) {
