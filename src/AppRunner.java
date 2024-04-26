@@ -2,6 +2,8 @@ import enums.ActionLetter;
 import model.*;
 import util.UniversalArray;
 import util.UniversalArrayImpl;
+
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class AppRunner {
@@ -31,7 +33,6 @@ public class AppRunner {
             app.startSimulation();
         }
     }
-
     private void startSimulation() {
         print("В автомате доступны:");
         showProducts(products);
@@ -43,7 +44,6 @@ public class AppRunner {
         chooseAction(allowProducts);
 
     }
-
     private UniversalArray<Product> getAllowedProducts() {
         UniversalArray<Product> allowProducts = new UniversalArrayImpl<>();
         for (int i = 0; i < products.size(); i++) {
@@ -53,7 +53,6 @@ public class AppRunner {
         }
         return allowProducts;
     }
-
     private void chooseAction(UniversalArray<Product> products) {
         print(" a - Пополнить баланс");
         showActions(products);
@@ -82,25 +81,62 @@ public class AppRunner {
         }
     }
 
+
+    private PaymentMethod coinPayment() {
+        try {
+            print("Укажите сумму: ");
+            enteredMoney = intFromConsole();
+            coinAcceptor.setAmount(enteredMoney);
+        }catch (IllegalArgumentException | InputMismatchException e) {
+            print("Недопустимое значение. Попрбуйте еще раз.");
+            coinPayment();
+        }
+        return coinAcceptor;
+    }
+    private PaymentMethod cardPayment() {
+        try {
+            print("Введите номер карты: ");
+            int value = Integer.parseInt(strFromConsole().trim());
+            cardAcceptor.setCardNumber(strFromConsole().trim());
+        }catch (IllegalArgumentException | InputMismatchException e) {
+            print("Недопустимое значение. Попрбуйте еще раз.");
+            cardPayment();
+        }
+        try {
+            print("Введите пароль от карты: ");
+            cardAcceptor.setPassword(intFromConsole());
+        }catch (IllegalArgumentException | InputMismatchException e) {
+            print("Недопустимое значение. Попрбуйте еще раз.");
+            cardPayment();
+        }
+        try {
+            print("Укажите сумму: ");
+            enteredMoney = intFromConsole();
+            cardAcceptor.setAmount(enteredMoney);
+        }catch (IllegalArgumentException | InputMismatchException e) {
+            print("Недопустимое значение. Попрбуйте еще раз.");
+            cardPayment();
+        }
+        return cardAcceptor;
+    }
+
+
     private String strFromConsole() {
         return new Scanner(System.in).nextLine();
     }
     private int intFromConsole() {
         return new Scanner(System.in).nextInt();
     }
-
     private void showActions(UniversalArray<Product> products) {
         for (int i = 0; i < products.size(); i++) {
             print(String.format(" %s - %s", products.get(i).getActionLetter().getValue(), products.get(i).getName()));
         }
     }
-
     private void showProducts(UniversalArray<Product> products) {
         for (int i = 0; i < products.size(); i++) {
             print(products.get(i).toString());
         }
     }
-
     private void print(String msg) {
         System.out.println(msg);
     }
