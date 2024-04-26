@@ -6,11 +6,8 @@ import util.UniversalArrayImpl;
 import java.util.Scanner;
 
 public class AppRunner {
-
     private final UniversalArray<Product> products = new UniversalArrayImpl<>();
-
     private final CoinAcceptor coinAcceptor;
-
     private static boolean isExit = false;
 
     private AppRunner() {
@@ -80,8 +77,6 @@ public class AppRunner {
                 chooseAction(products);
             }
         }
-
-
     }
 
     private void showActions(UniversalArray<Product> products) {
