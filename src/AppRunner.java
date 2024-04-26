@@ -2,12 +2,13 @@ import enums.ActionLetter;
 import model.*;
 import util.UniversalArray;
 import util.UniversalArrayImpl;
-
 import java.util.Scanner;
 
 public class AppRunner {
     private final UniversalArray<Product> products = new UniversalArrayImpl<>();
-    private final CoinAcceptor coinAcceptor;
+    private final PaymentMethod cardAcceptor;
+    private final PaymentMethod coinAcceptor;
+    private PaymentMethod paymentMethod;
     private static boolean isExit = false;
 
     private AppRunner() {
@@ -19,6 +20,7 @@ public class AppRunner {
                 new Mars(ActionLetter.F, 80),
                 new Pistachios(ActionLetter.G, 130)
         });
+        cardAcceptor = new CardAcceptor(0);
         coinAcceptor = new CoinAcceptor(100);
     }
 
